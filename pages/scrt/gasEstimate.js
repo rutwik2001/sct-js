@@ -1,9 +1,11 @@
 import React,{Component} from 'react';
 import { Card, Button,Form,Message, Icon, Container } from 'semantic-ui-react';
-import scrt from '../../ethereum/scrt';
-import web3 from '../../ethereum/web3'
 import {Link, Router} from '../../routes';
 import Layout from '../../components/Layout'
+import web3 from '../../ethereum/web3'
+import scrt from '../../ethereum/scrt'
+import { ethers } from "ethers";
+import scrtABI from '../../ethereum/build/scrtabi.json';
 
 class SCRT extends Component{
     static async getInitialProps({query}) {
@@ -40,13 +42,19 @@ class SCRT extends Component{
         this.setState({loading: true, errorMessage: ''});
 
         try{
+
+            const provider = new ethers.providers.Web3Provider(window.ethereum)
+            await provider.send("eth_requestAccounts", []);
+            const signer = provider.getSigner()
+            const account = await signer.getAddress()
+
+            const contract_address = "0x750EbBfBD277d43929aA2D7a8d737F4a8EEBe817"
+            const contract = new ethers.Contract(contract_address, scrtABI, signer);
             
-            await scrt.methods.sendTokens(this.props.account, this.props.tokensCount).send({
-                from: this.props.account
-            })
+            await contract.sendTokens(this.props.account, this.props.tokensCount)
             this.setState({hidden: false})
             this.setState({successMessage: "Your transaction is completed successfully, Redirecting back to profile in 10 seconds"}); 
-            setTimeout(() => { Router.pushRoute(`http://localhost.smartcookie.in//main/rewards_log`) }, 10000);
+            setTimeout(() => { Router.pushRoute(`https://www.facebook.com/`) }, 10000);
             
 
         //

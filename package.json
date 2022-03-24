@@ -18,6 +18,7 @@
     "dotenv": "^16.0.0",
     "fs-extra": "^10.0.1",
     "mocha": "^9.2.1",
+    "ethers": "^5.6.1",
     "next": "^12.1.0",
     "next-routes-extended": "^1.7.0",
     "react": "^17.0.2",

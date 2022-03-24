@@ -54,7 +54,7 @@ class SCRT extends Component{
             await contract.sendTokens(this.props.account, this.props.tokensCount)
             this.setState({hidden: false})
             this.setState({successMessage: "Your transaction is completed successfully, Redirecting back to profile in 10 seconds"}); 
-            setTimeout(() => { Router.pushRoute(`/main/rewards_log`) }, 10000);
+            setTimeout(() => { Router.pushRoute(`https://dev.smartcookie.in/main/rewards_log`) }, 10000);
             
 
         //

@@ -84,9 +84,9 @@ class SCRT extends Component{
         if (isMobileDevice) {
              window.onload = function() {
     //<!-- Deep link URL for existing users with app already installed on their device -->
-        window.location = 'robokart://deva';
+        window.location = 'smartstudent://metamask';
     //<!-- Download URL (TUNE link) for new users to download the app -->
-        setTimeout("window.location = 'https://play.google.com/store/apps/details?id=com.ark.robokart_robotics';", 1000);
+        setTimeout("window.location = 'https://play.google.com/store/apps/details?id=com.bpsi.smartstudentmodified';", 1000);
     }
         } else {
             Router.pushRoute(`https://dev.smartcookie.in/main/rewards_log`)

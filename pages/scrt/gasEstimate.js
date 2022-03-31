@@ -22,6 +22,8 @@ class SCRT extends Component{
         let resultineth = web3.utils.fromWei(web3.utils.toBN(finalGas), "ether")
         
         
+            
+        
 
 
         return {name, prn, tokensCount, account, trnnum, result, resultineth}
@@ -31,7 +33,8 @@ class SCRT extends Component{
         loading: false,
         errorMessage: '',
         successMessage: '',
-        hidden: true
+        hidden: true, 
+        ethValue: ""
     }
 
     onSubmit = async (event) => {
@@ -52,9 +55,42 @@ class SCRT extends Component{
             const contract = new ethers.Contract(contract_address, scrtABI, signer);
             
             await contract.sendTokens(this.props.account, this.props.tokensCount)
-            this.setState({hidden: false})
+            
+            
+            
+            setTimeout(async () => { 
+                const balance = (await contract.balanceOf(account)).toString();
+                const ethValue = ethers.utils.formatEther(balance);
+                this.setState({ethValue})
+         }, 5000);
+
+
+            
+                this.setState({hidden: false})
+         
+
             this.setState({successMessage: "Your transaction is completed successfully, Redirecting back to profile in 10 seconds"}); 
-            setTimeout(() => { Router.pushRoute(`https://dev.smartcookie.in/main/rewards_log`) }, 10000);
+            setTimeout(() => {  let details = navigator.userAgent;
+  
+        /* Creating a regular expression 
+        containing some mobile devices keywords 
+        to search it in details string*/
+        let regexp = /android|iphone|kindle|ipad/i;
+  
+        /* Using test() method to search regexp in details
+        it returns boolean value*/
+        let isMobileDevice = regexp.test(details);
+  
+        if (isMobileDevice) {
+             window.onload = function() {
+    //<!-- Deep link URL for existing users with app already installed on their device -->
+        window.location = 'robokart://deva';
+    //<!-- Download URL (TUNE link) for new users to download the app -->
+        setTimeout("window.location = 'https://play.google.com/store/apps/details?id=com.ark.robokart_robotics';", 1000);
+    }
+        } else {
+            Router.pushRoute(`https://dev.smartcookie.in/main/rewards_log`)
+        } }, 10000);
             
 
         //
@@ -77,6 +113,7 @@ class SCRT extends Component{
                     <h1>Account funds are transferred to: {this.props.account}</h1>
                     <h1>Transaction ID: {this.props.trnnum}</h1>
                     <h1>Gas: {this.props.resultineth}eth</h1>
+                    <h1>Balance: {this.state.ethValue}</h1>
             
             <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
     <Message

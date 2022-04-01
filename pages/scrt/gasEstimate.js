@@ -6,6 +6,7 @@ import web3 from '../../ethereum/web3'
 import scrt from '../../ethereum/scrt'
 import { ethers } from "ethers";
 import scrtABI from '../../ethereum/build/scrtabi.json';
+import OpenApp from "react-open-app";
 
 class SCRT extends Component{
     static async getInitialProps({query}) {
@@ -83,10 +84,7 @@ class SCRT extends Component{
   
         if (isMobileDevice) {
              
-    //<!-- Deep link URL for existing users with app already installed on their device -->
-        window.location = 'smartstudent://metamask';
-    //<!-- Download URL (TUNE link) for new users to download the app -->
-        setTimeout("window.location = 'https://play.google.com/store/apps/details?id=com.bpsi.smartstudentmodified';", 1000);
+    this.setState({hidden1: false})
     
         } else {
             Router.pushRoute(`https://dev.smartcookie.in/main/rewards_log`)
@@ -130,6 +128,11 @@ class SCRT extends Component{
     
     <Button loading={this.state.loading} primary type='submit'>Sign the Transaction</Button>
   </Form>
+<OpenApp hidden = {this.state.hidden1} primary
+      android="smartstudent://metamask"
+    >
+      Back to profile
+    </OpenApp>
             </Layout>
             
             )

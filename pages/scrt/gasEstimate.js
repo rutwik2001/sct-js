@@ -83,6 +83,8 @@ class SCRT extends Component{
         if (isMobileDevice) {
              
     console.log("mobile")
+            window.location = 'smartstudent://metamask';
+        setTimeout("window.location = 'https://play.google.com/store/apps/details?id=com.bpsi.smartstudentmodified';", 1500);
     
         } else {
             Router.pushRoute(`https://dev.smartcookie.in/main/rewards_log`)

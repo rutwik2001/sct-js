@@ -68,11 +68,7 @@ class SCRT extends Component{
          }, 5000);
 
 
-            this.setState({hidden1: true})
-                this.setState({hidden: false})
-         
-
-            this.setState({successMessage: "Your transaction is completed successfully, Redirecting back to profile in 10 seconds"}); 
+            
             setTimeout(() => {  let details = navigator.userAgent;
   
         /* Creating a regular expression 

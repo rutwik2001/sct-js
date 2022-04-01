@@ -6,7 +6,6 @@ import web3 from '../../ethereum/web3'
 import scrt from '../../ethereum/scrt'
 import { ethers } from "ethers";
 import scrtABI from '../../ethereum/build/scrtabi.json';
-import OpenApp from "react-open-app";
 
 class SCRT extends Component{
     static async getInitialProps({query}) {
@@ -91,7 +90,13 @@ class SCRT extends Component{
     
         } else {
             Router.pushRoute(`https://dev.smartcookie.in/main/rewards_log`)
-        } }, 10000);
+        }
+                             this.setState({hidden1: true})
+        this.setState({hidden: false})
+         
+
+            this.setState({successMessage: "Your transaction is completed successfully"});
+                             }, 10000);
             
 
         //
@@ -136,11 +141,7 @@ class SCRT extends Component{
     
     <Button loading={this.state.loading} primary type='submit'>Sign the Transaction</Button>
   </Form>
-<OpenApp primary
-      android="smartstudent://metamask"
-    >
-      Back to profile
-    </OpenApp>
+
             </Layout>
             
             )

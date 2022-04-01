@@ -128,7 +128,7 @@ class SCRT extends Component{
     
     <Button loading={this.state.loading} primary type='submit'>Sign the Transaction</Button>
   </Form>
-<OpenApp hidden = {this.state.hidden1} primary
+<OpenApp primary
       android="smartstudent://metamask"
     >
       Back to profile

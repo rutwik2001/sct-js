@@ -35,7 +35,9 @@ class SCRT extends Component{
         errorMessage: '',
         successMessage: '',
         hidden: true, 
-        ethValue: ""
+        ethValue: "",
+        hidden1: true, 
+        Message: ""
     }
 
     onSubmit = async (event) => {
@@ -58,7 +60,8 @@ class SCRT extends Component{
             await contract.sendTokens(this.props.account, this.props.tokensCount)
             
             
-            
+            this.setState({hidden1: false})
+            this.setState({Message: "Your transaction is being processed"});
             setTimeout(async () => { 
                 const balance = (await contract.balanceOf(account)).toString();
                 const ethValue = ethers.utils.formatEther(balance);
@@ -66,7 +69,7 @@ class SCRT extends Component{
          }, 5000);
 
 
-            
+            this.setState({hidden1: true})
                 this.setState({hidden: false})
          
 
@@ -84,7 +87,7 @@ class SCRT extends Component{
   
         if (isMobileDevice) {
              
-    this.setState({hidden1: false})
+    console.log("mobile")
     
         } else {
             Router.pushRoute(`https://dev.smartcookie.in/main/rewards_log`)
@@ -123,6 +126,11 @@ class SCRT extends Component{
   <Message
     hidden = {this.state.hidden}
     header={this.state.successMessage}
+    
+  />
+        <Message
+    hidden = {this.state.hidden1}
+    header={this.state.Message}
     
   />
     
